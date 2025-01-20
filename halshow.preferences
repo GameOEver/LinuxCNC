@@ -1,0 +1,35 @@
+# Halshow settings
+# This file is generated automatically.
+wm geometry . 1083x770+641+168
+placeFrames 0.29411764705882354
+set ::ratio 0.29411764705882354
+set ::old_w_leftf 160
+set ::watchlist {
+    pin+spindle.0.at-speed
+    pin+hm2_7i76e.0.gpio.000.in
+    pin+hm2_7i76e.0.gpio.001.in
+    pin+hm2_7i76e.0.gpio.002.in
+    pin+hm2_7i76e.0.gpio.003.in
+    pin+hm2_7i76e.0.gpio.004.in
+    pin+hm2_7i76e.0.gpio.005.in
+    pin+hm2_7i76e.0.gpio.006.in
+    pin+hm2_7i76e.0.gpio.007.in
+    sig+probe-in
+    pin+mb2hal.run_info.00.float
+    pin+mb2hal.run_info.00.int
+    pin+spindle.0.amp-fault-in
+    pin+spindle.0.brake
+    pin+spindle.0.index-enable
+    pin+spindle.0.forward
+    pin+spindle.0.reverse
+    pin+scale-current.out
+    pin+scale-current.in
+    pin+mb2hal.run_info.num_errors
+}
+set ::workmode watchhal
+set ::watchInterval 100
+set ::col1_width 100
+set ::ffmts 
+set ::ifmts 
+set ::alwaysOnTop 0
+set ::autoSaveWatchlist 1
