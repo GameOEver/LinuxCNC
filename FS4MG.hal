@@ -28,8 +28,8 @@ net digital-out-0 motion.digital-out-00 => hm2_7i76e.0.7i76.0.0.output-02
 net digital-out-1 motion.digital-out-01 => hm2_7i76e.0.7i76.0.0.output-03
 net digital-out-2 motion.digital-out-02 => hm2_7i76e.0.7i76.0.0.output-04
 net digital-out-3 motion.digital-out-03 => hm2_7i76e.0.7i76.0.0.output-05
-net digital-in-0 motion.digital-in-00 <= hm2_7i76e.0.7i76.0.0.input-05
-net digital-in-1 motion.digital-in-01 <= hm2_7i76e.0.7i76.0.0.input-06
+net digital-in-0 motion.digital-in-00 <= hm2_7i76e.0.7i76.0.0.input-06
+net digital-in-1 motion.digital-in-01 <= hm2_7i76e.0.7i76.0.0.input-07
 
 # --- COOLANT-MIST ---
 net coolant-mist  =>     hm2_7i76e.0.7i76.0.0.output-00
@@ -228,15 +228,9 @@ net jog-x-neg      halui.axis.x.minus
 net jog-x-analog   halui.axis.x.analog
 net x-is-homed     halui.joint.0.is-homed
 net axis-select-y  halui.axis.y.select
-net jog-y-pos      halui.axis.y.plus
-net jog-y-neg      halui.axis.y.minus
-net jog-y-analog   halui.axis.y.analog
-net y-is-homed     halui.joint.1.is-homed
 net axis-select-z  halui.axis.z.select
 net jog-z-pos      halui.axis.z.plus
-net jog-z-neg      halui.axis.z.minus
-net jog-z-analog   halui.axis.z.analog
-net z-is-homed     halui.joint.2.is-homed
+net y-is-homed     halui.joint.1.is-homed
 net jog-selected-pos      halui.axis.selected.plus
 net jog-selected-neg      halui.axis.selected.minus
 net spindle-manual-cw     halui.spindle.0.forward
@@ -301,3 +295,7 @@ net probe-in        =>  or2.0.in0
 net tls-in          =>  or2.0.in1
 net probe-tool          or2.0.out
 net probe-tool      =>  motion.probe-input
+
+
+
+loadusr arduino-connector
