@@ -1,68 +1,49 @@
 o<manuell_atc> sub
 
-o<not_t0> sub
-    M500    (Sicher ist sicher)
-    M9      
-    (msg,Tool festhalten dann cycle start drücken)
+M500    (Sicher ist sicher)
+M9      
+(msg,Tool festhalten dann cycle start drücken)
+M0
+M64P0   (Ausgang Ventil Air In)
+M64P1   (Ausgang Ventil Dust Remove)
+M66 P0 L3 Q5   (Input Tool released)
+o100 if [#5399 EQ -1]
+    (DEBUG, ERROR: Spindel hat kein Signal gegeben)
     M0
-    M64P0   (Ausgang Ventil Air In)
-    M64P1   (Ausgang Ventil Dust Remove)
-    M66 P0 L3 Q5   (Input Tool released)
-    o100 if [#5399 EQ -1]
-        (DEBUG, ERROR: Spindel hat kein Signal gegeben)
-        M0
-        M0
-        M0      (3x M0. Wer das drückt, will es drauf ankommen lassen)
-    o100 endif
-    (msg,neues tool einlegen, dann cycle start drücken)
     M0
-    M65P0   (Ausgang Ventil Air In)
-    M65P1   (Ausgang Ventil Dust Remove)
-    M64P2   (Ausgang Ventil Air return)
-    M66 P1 L3 Q5   (Input Tool clamped)
-    o101 if [#5399 EQ -1]
-        (DEBUG, ERROR: Spindel hat kein Signal gegeben)
-        M0
-        M0
-        M0     (3x M0. Wer das drückt, will es drauf ankommen lassen)
-    o101 endif
-    G4P5    (5s warten für Air return)
-    M65P2   (Ausgang Ventil Air return)
-    M61 Q#<_selected_tool>
-    (msg,Wechsel abgeschlossen)
+    M0      (3x M0. Wer das drückt, will es drauf ankommen lassen)
+o100 endif
 
-    o102 if [#<_selected_tool> EQ 99]
-        (msg, 3D Probe anschliessen)
-        M0
-    o102 endif
-o<not_t0> endsub
 
-o<is_t0> sub
-    M500    (Sicher ist sicher)
-    M9      
-    (msg,Tool festhalten dann cycle start drücken)
-    M0
-    M64P0   (Ausgang Ventil Air In)
-    M64P1   (Ausgang Ventil Dust Remove)
-    M66 P0 L3 Q5   (Input Tool released)
-    o103 if [#5399 EQ -1]
-        (DEBUG, ERROR: Spindel hat kein Signal gegeben)
-        M0
-        M0
-        M0      (3x M0. Wer das drückt, will es drauf ankommen lassen)
-    o103 endif
+o103 if[#<_selected_tool> EQ 0]
     M65P0   (Ausgang Ventil Air In)
     M65P1   (Ausgang Ventil Dust Remove)
     M61 Q#<_selected_tool>
-    (msg, Auf T0 gewechselt)
-o<is_t0> endsub
+    (msg,Wechsel auf T0 abgeschlossen)
+    o<manuell_atc> return
+o103 endif
 
+(msg,neues tool einlegen, dann cycle start drücken)
+M0
+M65P0   (Ausgang Ventil Air In)
+M65P1   (Ausgang Ventil Dust Remove)
+M64P2   (Ausgang Ventil Air return)
+M66 P1 L3 Q5   (Input Tool clamped)
+o101 if [#5399 EQ -1]
+    (DEBUG, ERROR: Spindel hat kein Signal gegeben)
+    M0
+    M0
+    M0     (3x M0. Wer das drückt, will es drauf ankommen lassen)
+o101 endif
+G4P5    (5s warten für Air return)
+M65P2   (Ausgang Ventil Air return)
+M61 Q#<_selected_tool>
+(msg,Wechsel abgeschlossen)
 
-o105 if [#<_selected_tool> EQ 0]
-    o<is_t0> call
-o105 else
-    o<not_t0> call
-o105 endif
+o102 if [#<_selected_tool> EQ 99]
+    (msg, 3D Probe anschliessen)
+    M0
+o102 endif
 
 o<manuell_atc> endsub
 
