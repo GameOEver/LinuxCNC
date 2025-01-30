@@ -20,7 +20,6 @@ o103 if[#<_selected_tool> EQ 0]
     M65P1   (Ausgang Ventil Dust Remove)
     M61 Q#<_selected_tool>
     (msg,Wechsel auf T0 abgeschlossen)
-    o<manuell_atc> return
 o103 else
     (msg,neues tool einlegen, dann cycle start drücken)
     M0
