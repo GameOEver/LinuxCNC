@@ -53,7 +53,7 @@ net max-home-z     <=  hm2_7i76e.0.7i76.0.0.input-02-not
 net estop-ext     <=  hm2_7i76e.0.7i76.0.0.input-03
 
 # --- PROBE-IN ---
-net probe-in     <=  hm2_7i76e.0.7i76.0.0.input-04-not
+net probe-in     <=  hm2_7i76e.0.7i76.0.0.input-08-not
 net tls-in       <=  hm2_7i76e.0.7i76.0.0.input-05-not
 
 #*******************
