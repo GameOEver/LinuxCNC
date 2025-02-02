@@ -16,6 +16,7 @@ o100 endif
 
 
 o103 if[#<_selected_tool> EQ 0]
+    G4 P2
     M65P0   (Ausgang Ventil Air In)
     M65P1   (Ausgang Ventil Dust Remove)
     M61 Q#<_selected_tool>
