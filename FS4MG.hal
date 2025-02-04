@@ -4,7 +4,7 @@
 # overwritten when you run PNCconf again
 
 loadrt [KINS]KINEMATICS
-loadrt [EMCMOT]EMCMOT servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS
+loadrt [EMCMOT]EMCMOT servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS num_dio=5
 loadrt hostmot2
 loadrt hm2_eth board_ip="10.10.10.10" config="num_encoders=1 num_pwmgens=0 num_stepgens=5 sserial_port_0=00xxxxxx" 
 setp    hm2_7i76e.0.watchdog.timeout_ns 5000000
@@ -28,6 +28,7 @@ net spindle-air-in motion.digital-out-00 => hm2_7i76e.0.7i76.0.0.output-02
 net spindle-dust-remove motion.digital-out-01 => hm2_7i76e.0.7i76.0.0.output-03
 net spindle-air-return motion.digital-out-02 => hm2_7i76e.0.7i76.0.0.output-04
 net spindle-air-seal motion.digital-out-03 => hm2_7i76e.0.7i76.0.0.output-05
+net tls-clean motion.digital-out-04 => hm2_7i76e.0.7i76.0.0.output-06
 net tool_released motion.digital-in-00 <= hm2_7i76e.0.7i76.0.0.input-06
 net tool_clamped motion.digital-in-01 <= hm2_7i76e.0.7i76.0.0.input-07
 
