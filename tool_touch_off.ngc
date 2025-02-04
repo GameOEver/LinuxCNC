@@ -29,6 +29,8 @@ o<tool_touch_off> sub
 #<disable_pre_pos> = 0              ;Disable the pre change positioning at g30 position.
 #<addreps> = 1                      ;Number of extra repetitions if fast probe failed.
 #<lasttry> = 1                      ;If "1" the machine do a probing at the last repetition without the tool table. #<addreps> must be min "1".
+#<clean_tls> = 1		    ;If "1" the valve for cleaning the tool length sensor wirll be activated just before measuring the tool.
+#<clean_tls_output> = 4		    ;This is the number that would be used in a M64 Px command (x would be 3 in this case). For this to work, you will need to define the "motion.digital-in-0x" pin in your .hal
 
 ;--Tool diameter--
 #<offset_diameter> = 20              ;Tool diameter from when a offset should take place. 0=OFF
@@ -305,7 +307,11 @@ o<200> do
 
   ;-120- Move to Z start position for length measurement
   G53 G0 Z#<probe_start_pos_z>
-
+  o<121> if [#<clean_tls> EQ 1]
+	M64P#<clean_tls_output>
+	G4P1
+	M65P#<clean_tls_output>
+  o<121>endif
   
   ;-130- Fast probe
   G91
