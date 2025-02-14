@@ -1,4 +1,4 @@
-O<spindle_warmup> sub
+o<spindle_warmup> sub
 
 (Macro to warm up the spindle prior to cutting)
 
@@ -7,8 +7,8 @@ O<spindle_warmup> sub
 #<TravelZ> =         -.25      ( machine ABS Z coordinate for travelling, typically near max Z to avoid ever hitting the work )
 
 G90
-G53 G0 Z[#<TravelZ]
-G53 G0 X[#<SafeX>] Y[#<SafeY]
+G53 G0 Z-1
+G53 G0 X350 Y220
 S8000 M3
 G04 P90
 S10000
@@ -30,6 +30,6 @@ G04 P90
 
 M500
 
-O<spindle_warmup> endsub
+o<spindle_warmup> endsub
 
 M2
