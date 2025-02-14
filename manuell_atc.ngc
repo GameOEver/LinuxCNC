@@ -2,6 +2,7 @@ o<manuell_atc> sub
 
 M500    (Sicher ist sicher)
 M9      
+(debug,Neues Tool: #<_selected_tool>)
 (msg,Tool festhalten dann cycle start drücken)
 M0
 M64P0   (Ausgang Ventil Air In)
@@ -24,7 +25,6 @@ o103 if[#<_selected_tool> EQ 0]
     (msg,Wechsel auf T0 abgeschlossen)
 o103 else
     (msg,neues tool einlegen, dann cycle start drücken)
-    (debug,Neues Tool: #<_selected_tool>)
     M0
     M65P0   (Ausgang Ventil Air In)
     M65P1   (Ausgang Ventil Dust Remove)
