@@ -1,4 +1,5 @@
 o<tool_touch_off> sub
+o<400> if [#<_task> EQ 1]
 
 ;Subprogram for manual tool change with measurement of the tool.
 ;Version date: 2024-12-07
@@ -415,6 +416,7 @@ o<140> endif
 
 (LOG, END)
 (LOGCLOSE)
+o<400> endif
 o<tool_touch_off> endsub
 
 M2 (end program)
