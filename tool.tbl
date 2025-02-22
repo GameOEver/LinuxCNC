@@ -1,5 +1,14 @@
-T1 P1 Z0.511 D3 ;3mm end mill Sample Tool
-T2 P4 Z0.1 D1.5 ;1.5mm  end mill Sample Tool
-T3 P3 Z1.273 D5 ;5mm tap drill Sample Tool
-T4 P2 Z10 D16 ;16 mm Sample Tool
-T5 P5 Z25 D25 ;25mm er Sample Tool
+T2   P2   D+6.000000 Z+22.337625 ; 6mm 1F dlc
+T3   P3   D+4.000000 Z+24.333403 ; 4mm 1f dlc sl15
+T4   P4   D+8.000000 Z+30.096983 ; 8mm 3f dlc
+T6   P6   D+8.000000 Z+23.090375 ; 8mm 3f chamfer
+T10  P10  D+8.000000 Z+25.693958 ; 8mm 4f dlc garant
+T12  P12  D+5.000000 Z+18.740148 ; 5mm chamfer
+T14  P14  D+2.350000 Z+15.471000 ; m3 dlc
+T18  P18  D+4.000000 Z+15.289292 ; 4mm ball nose
+T44  P44  D+2.900000 Z+11.683208 ; 2.9mm vhm bohrer
+T45  P45  D+3.200000 Z+12.530334 ; 3.2mm vhm bohrer
+T46  P46  D+2.500000 Z+12.680584 ; 2.5mm vhm bohrer
+T47  P47  D+3.300000 Z+12.343792 ; 3.3mm vhm bohrer
+T99  P0   D+3.000000 Z+54.116402 ; 3d probe
+T17  P17  D+4.800000 Z+22.409652 ; m6 DLC
