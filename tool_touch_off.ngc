@@ -194,7 +194,7 @@ o<90> endif
 ;The case only serves to ensure that a measurement is not accidentally started with tool 0.
 o<100> if [#<tool_selected> EQ 0]
   G90
-  G53 G0 Z-1
+  G53 G0 Z0
   M6 T#<tool_selected> 
   G49
   (LOG, END M6 T0)
@@ -215,7 +215,7 @@ o<200> do
   ;Turn off spindle befor the machine moves to probe / change  / edge-finder position.
   G49
   G90             (set absolute coordinates)
-  G53 G0 Z-1       (move to z0 home position)
+  G53 G0 Z0       (move to z0 home position)
   #<offset_z> = #5422         ;Stores the offset of the current Z coordinate at G53 Z0 without tool offset.
   M#<spindle_stop_m>
 
@@ -258,7 +258,7 @@ o<200> do
 
 
   ;-100- Positioning for measuring
-  G53 G0 Z-1       (move to z0 home position)
+  G53 G0 Z0       (move to z0 home position)
   o<160> if [#<finder_number> GT 0 AND #<tool_selected> EQ #<finder_number>] 
     ;Edge-finder position
     G53 G0 X#<finder_touch_x_coords> Y#<finder_touch_y_coords>
@@ -394,7 +394,7 @@ T #5400 G43  H #5400    (enable tool length offset)
 
 ;-200- Drive the tool free
 G90    (set absolute coordinates)
-G53 G0 Z-1 (Send spindle to home zero position)
+G53 G0 Z0 (Send spindle to home zero position)
 
 
 ;-210- Return to hold position and choose pause
