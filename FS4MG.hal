@@ -23,39 +23,73 @@ setp hm2_7i76e.0.stepgen.timer-number 1
 
 # external output signals
 
-# --- ATC-OUTPUTS ---
-net spindle-air-in motion.digital-out-00 => hm2_7i76e.0.7i76.0.0.output-02
-net spindle-dust-remove motion.digital-out-01 => hm2_7i76e.0.7i76.0.0.output-03
-net spindle-air-return motion.digital-out-02 => hm2_7i76e.0.7i76.0.0.output-04
-net spindle-air-seal motion.digital-out-03 => hm2_7i76e.0.7i76.0.0.output-05
-net tls-clean motion.digital-out-04 => hm2_7i76e.0.7i76.0.0.output-06
-net tool_released motion.digital-in-00 <= hm2_7i76e.0.7i76.0.0.input-06
-net tool_clamped motion.digital-in-01 <= hm2_7i76e.0.7i76.0.0.input-07
+# ---Analog Inputs---
+# --- AI 00 FIELDVOLTAGE ---
+# Note: Reference voltage 24v  through external port, as mesa internal ref voltage is garbage
+net     AI-SYS-fieldvoltage             <= hm2_7i76e.0.7i76.0.0.analogin0
 
-# --- COOLANT-MIST ---
+# --- AI 01  ATC-TEMP-SENSOR ---
+# Note: Voltage from voltage divider over spindle temperature sensor
+net     AI-ATC-temp-sensor              <= hm2_7i76e.0.7i76.0.0.analogin1
+
+# --- AI 02  UNUSED ---
+# Note: Voltage from voltage divider over spindle temperature sensor
+#net     ...              <= hm2_7i76e.0.7i76.0.0.analogin2
+
+# --- AI 03  UNUSED ---
+# Note: Voltage from voltage divider over spindle temperature sensor
+#net     ...              <= hm2_7i76e.0.7i76.0.0.analogin3
+
+
+
+# ---Digital Inputs---
+# --- DI 04 Home min X ---
+net min-home-x     <=  hm2_7i76e.0.7i76.0.0.input-04-not
+
+# --- DI 05 Home min Y ---
+net min-home-y     <=  hm2_7i76e.0.7i76.0.0.input-05-not
+
+# --- DI 06 Home max Z ---
+net max-home-z     <=  hm2_7i76e.0.7i76.0.0.input-06-not
+
+# --- DI 07 E-Stop ---
+net estop-ext     <=  hm2_7i76e.0.7i76.0.0.input-07
+
+# --- DI 08 Probe-IN ---
+net probe-in     <=  hm2_7i76e.0.7i76.0.0.input-08-not
+
+# --- DI 09 TLS-IN ---
+net tls-in       <=  hm2_7i76e.0.7i76.0.0.input-09-not
+
+# --- DI 10 Tool-released ---
+net tool_released motion.digital-in-00 <= hm2_7i76e.0.7i76.0.0.input-10
+
+# --- DI 11 Tool-Clamped ---
+net tool_clamped motion.digital-in-01 <= hm2_7i76e.0.7i76.0.0.input-11
+
+
+# ---Digital Outputs---
+# --- DO 00 MQL ---
 net coolant-mist  =>     hm2_7i76e.0.7i76.0.0.output-00
 
-# --- MACHINE-IS-ENABLED ---
+# --- DO 01 Machine-enabled ---
 net machine-is-enabled  =>     hm2_7i76e.0.7i76.0.0.output-01
 
-# external input signals
+# --- DO 02 Spindle-air-in ---
+net spindle-air-in motion.digital-out-00 => hm2_7i76e.0.7i76.0.0.output-02
 
+# --- DO 03 Spindle-dust-remove ---
+net spindle-dust-remove motion.digital-out-01 => hm2_7i76e.0.7i76.0.0.output-03
 
-# --- MIN-HOME-X ---
-net min-home-x     <=  hm2_7i76e.0.7i76.0.0.input-00-not
+# --- DO 04 Spindle-air-return ---
+net spindle-air-return motion.digital-out-02 => hm2_7i76e.0.7i76.0.0.output-04
 
-# --- MIN-HOME-Y ---
-net min-home-y     <=  hm2_7i76e.0.7i76.0.0.input-01-not
+# --- DO 05 Spindle-air-seal ---
+net spindle-air-seal motion.digital-out-03 => hm2_7i76e.0.7i76.0.0.output-05
 
-# --- MAX-HOME-Z ---
-net max-home-z     <=  hm2_7i76e.0.7i76.0.0.input-02-not
+# --- DO 06 MQL ---
+net tls-clean motion.digital-out-04 => hm2_7i76e.0.7i76.0.0.output-06
 
-# --- ESTOP-EXT ---
-net estop-ext     <=  hm2_7i76e.0.7i76.0.0.input-03
-
-# --- PROBE-IN ---
-net probe-in     <=  hm2_7i76e.0.7i76.0.0.input-08-not
-net tls-in       <=  hm2_7i76e.0.7i76.0.0.input-05-not
 
 #*******************
 #  AXIS X JOINT 0
