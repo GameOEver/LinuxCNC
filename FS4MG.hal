@@ -280,35 +280,22 @@ net MDI-mode              halui.mode.is-mdi
 net coolant-mist      <=  iocontrol.0.coolant-mist
 net coolant-flood     <=  iocontrol.0.coolant-flood
 
-#  ---probe signal---
-
-#net probe-in     =>  motion.probe-input
-
 #  ---motion control signals---
 
 net in-position               <=  motion.in-position
 net machine-is-enabled        <=  motion.motion-enabled
 
-#  ---digital in / out signals---
 
 #  ---estop signals---
 
 net estop-out     <=  iocontrol.0.user-enable-out
 net estop-ext     =>  iocontrol.0.emc-enable-in
 
-#  ---manual tool change signals---
-
-#net tool-change-request    <= iocontrol.0.tool-change
-#net tool-change-confirmed  => iocontrol.0.tool-changed
-#net tool-number            <= iocontrol.0.tool-prep-number
-
 #  ---signals to show tool offset in the GUI---
 
 net tooloffset-x  <=  motion.tooloffset.x
 net tooloffset-z  <=  motion.tooloffset.z
 
-#  ---ignore tool prepare requests---
-net tool-prepare-loopback   iocontrol.0.tool-prepare      =>  iocontrol.0.tool-prepared
 
 # PROBE
 loadrt or2 count=1
@@ -321,5 +308,25 @@ net probe-tool          or2.0.out
 net probe-tool      =>  motion.probe-input
 
 
+# ---------- SPINDLE NTC ----------
+# by Tilman from github/hausen8
+# NTC: 103F3950, R25: 10K 1% B: 3950K
+# analogin2: 24V fieldvoltage (since hm2_7i76e.0.7i76.0.0.fieldvoltage is too noisy)
+# analogin3: output of voltage divider (spindle NTC / 10K resistor)
+# offset.ntc is required since we don't need the output voltage but the voltage drop
+# comp.temp compares the computed temperature with a maximum temperature to trigger estop
 
-loadusr arduino-connector
+loadusr  -W thermistor
+
+setp     thermistor.0.t0-c                     [NTC]NTC_TEMP
+setp     thermistor.0.r0                       [NTC]NTC_RES
+setp     thermistor.0.beta                     [NTC]NTC_BETA
+setp     thermistor.0.r-other                  [NTC]VDIV_RES
+setp     comp.temp.in0                         [NTC]NTC_MAX_TEMP
+
+net      AI-SYS-fieldvoltage                   offset.ntc.fb-in                    
+net      AI-ATC-temp-sensor                    offset.ntc.offset                   
+net      ntc-voltage-drop                      offset.ntc.fb-out                   thermistor.0.v-thermistor
+
+net      AI-SYS-fieldvoltage                   thermistor.0.v-total
+net      SPINDLE-temp-ori                      thermistor.0.temperature-c          offset.temp.in
