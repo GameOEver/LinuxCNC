@@ -334,23 +334,23 @@ net probe-tool      =>  motion.probe-input
 # comp.temp compares the computed temperature with a maximum temperature to trigger estop
 
 #loadusr  -W thermistor
-#loadrt comp         names=comp.temp
-#addf comp.temp      servo-thread
-#loadrt  offset                              names=offset.ntc,offset.temp
-#addf    offset.ntc.update-feedback          servo-thread
-#addf    offset.temp.update-output           servo-thread
-#setp     offset.temp.offset 0
-#net      SPINDLE-temp                   offset.temp.out         comp.temp.in1
+loadrt comp         names=comp.temp
+addf comp.temp      servo-thread
 
-#setp     thermistor.0.t0-c                     [NTC]NTC_TEMP
-#setp     thermistor.0.r0                       [NTC]NTC_RES
-#setp     thermistor.0.beta                     [NTC]NTC_BETA
-#setp     thermistor.0.r-other                  [NTC]VDIV_RES
-#setp     comp.temp.in0                         [NTC]NTC_MAX_TEMP
+addf    offset.ntc.update-feedback          servo-thread
+addf    offset.temp.update-output           servo-thread
+setp     offset.temp.offset 0
+net      SPINDLE-temp                   offset.temp.out         comp.temp.in1
 
-#net      AI-SYS-fieldvoltage                   offset.ntc.fb-in
-#net      AI-ATC-temp-sensor                    offset.ntc.offset
-#net      ntc-voltage-drop                      offset.ntc.fb-out                   thermistor.0.v-thermistor
+setp     thermistor.0.t0-c                     [NTC]NTC_TEMP
+setp     thermistor.0.r0                       [NTC]NTC_RES
+setp     thermistor.0.beta                     [NTC]NTC_BETA
+setp     thermistor.0.r-other                  [NTC]VDIV_RES
+setp     comp.temp.in0                         [NTC]NTC_MAX_TEMP
 
-#net      AI-SYS-fieldvoltage                   thermistor.0.v-total
-#net      SPINDLE-temp-ori                      thermistor.0.temperature-c          offset.temp.in
+net      AI-SYS-fieldvoltage                   offset.ntc.fb-in
+net      AI-ATC-temp-sensor                    offset.ntc.offset
+net      ntc-voltage-drop                      offset.ntc.fb-out                   thermistor.0.v-thermistor
+
+net      AI-SYS-fieldvoltage                   thermistor.0.v-total
+net      SPINDLE-temp-ori                      thermistor.0.temperature-c          offset.temp.in
