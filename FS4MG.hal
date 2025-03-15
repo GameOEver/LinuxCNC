@@ -67,6 +67,20 @@ net tool_released motion.digital-in-00 <= hm2_7i76e.0.7i76.0.0.input-10
 # --- DI 11 Tool-Clamped ---
 net tool_clamped motion.digital-in-01 <= hm2_7i76e.0.7i76.0.0.input-11
 
+# --- DI 12 Machine power ---
+net external-machine-power-on halui.machine.on <= hm2_7i76e.0.7i76.0.0.input-12
+net external-machine-power-off halui.machine.off <= hm2_7i76e.0.7i76.0.0.input-12-not
+
+# --- DI 13 Cycle Start ---
+net external-cycle-start halui.program.run <= hm2_7i76e.0.7i76.0.0.input-13
+
+# --- DI 14 Feed Hold ---
+net external-feed-hold halui.program.pause <= hm2_7i76e.0.7i76.0.0.input-14
+
+# --- DI 15 Spindle manual Tool release ---
+#net manual-tool-release ??? <= hm2_7i76e.0.7i76.0.0.input-15
+
+
 
 # ---Digital Outputs---
 # --- DO 00 MQL ---
@@ -89,6 +103,9 @@ net spindle-air-seal motion.digital-out-03 => hm2_7i76e.0.7i76.0.0.output-05
 
 # --- DO 06 MQL ---
 net tls-clean motion.digital-out-04 => hm2_7i76e.0.7i76.0.0.output-06
+
+# --- DO 07 Manual Toolchange allowed light ---
+net light-manual-toolchange-allowed spindle-enable-not => hm2_7i76e.0.7i76.0.0.output-07
 
 
 #*******************
