@@ -79,7 +79,7 @@ net convert-STW				wsum.0.sum => conv-STW.in
 
 # Spindle speed info conversion
 ## The value sent back by the VFD is centered around 32768
-loadrt offset count=2
+loadrt offset names=0,1,thermistor-offset
 addf offset.0.update-output servo-thread
 addf offset.1.update-output servo-thread
 
