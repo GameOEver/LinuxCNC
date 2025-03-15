@@ -12,8 +12,9 @@ addf scale-current servo-thread
 # for a 24000 rpm spindle, that means 166384/24000 = 0.683
 setp scale-spindle.gain 0.682666666666666666666
 
-# Current reported by VFD is in A/100
-setp scale-current.gain 0.01
+# Current reported by VFD is in A/100 -> von 600 ausgehend ist es 0.166[...]7
+#Dann sollte ein Wert von 
+setp scale-current.gain 0.16666666666666666666666666666667
 
 net spindle-speed-command <= spindle.0.speed-out-abs
 net spindle-speed-command => scale-spindle.in
