@@ -10,7 +10,7 @@ addf scale-current servo-thread
 
 # 100% frequency is 0x4000 (16384dec). Gain is 0x4000 / max_rpm
 # for a 24000 rpm spindle, that means 166384/24000 = 0.683
-setp scale-spindle.gain 0.683
+setp scale-spindle.gain 0.682666666666666666666
 
 # Current reported by VFD is in A/100
 setp scale-current.gain 0.01

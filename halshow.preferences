@@ -1,8 +1,8 @@
 # Halshow settings
 # This file is generated automatically.
-wm geometry . 1083x662+474+201
-placeFrames 0.2819794584500467
-set ::ratio 0.2819794584500467
+wm geometry . 1083x662+726+209
+placeFrames 0.28291316526610644
+set ::ratio 0.28291316526610644
 set ::old_w_leftf 160
 set ::watchlist {
     sig+spindle-info-current
@@ -10,15 +10,6 @@ set ::watchlist {
     sig+spindle-info-power
     sig+spindle-at-speed
     pin+spindle.0.speed-out
-    pin+motion.digital-in-00
-    pin+motion.digital-in-01
-    pin+arduino.ain.29
-    pin+halui.program.is-idle
-    pin+or2.0.out
-    pin+or2.0.in0
-    pin+or2.0.in1
-    sig+probe-in
-    sig+tls-in
     pin+hm2_7i76e.0.7i76.0.0.input-08-not
     sig+tool_clamped
     sig+tool_released
@@ -26,14 +17,29 @@ set ::watchlist {
     sig+spindle-air-in
     sig+spindle-air-return
     sig+spindle-air-seal
+    pin+scale-current.in
+    pin+scale-current.out
+    pin+scale-spindle.in
+    pin+scale-spindle.out
+    pin+qtpyvcp.spindle-load-indicator.in-f
+    pin+qtpyvcp.spindle-load-indicator.in-i
+    pin+qtpyvcp.spindle-load-indicator.max-val
+    pin+qtpyvcp.spindle-load-indicator.min-val
+    pin+motion.analog-in-00
+    pin+motion.analog-in-01
+    pin+motion.analog-out-00
+    sig+AI-ATC-temp-sensor
+    sig+AI-SYS-fieldvoltage
     sig+max-home-z
     sig+min-home-x
-    pin+halui.mdi-command-01
-    pin+halui.mdi-command-00
-    sig+z-neg-limit
-    pin+axis.x.jog-accel-fraction
-    pin+axis.y.jog-accel-fraction
-    pin+axis.z.jog-accel-fraction
+    sig+min-home-y
+    sig+probe-in
+    sig+tls-in
+    pin+scale-spindle.gain
+    pin+scale-spindle.offset
+    pin+scale-spindle.time
+    sig+true-rpm
+    sig+light-manual-toolchange-allowed
 }
 set ::workmode watchhal
 set ::watchInterval 100

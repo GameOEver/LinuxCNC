@@ -68,17 +68,17 @@ net tool_released motion.digital-in-00 <= hm2_7i76e.0.7i76.0.0.input-10
 net tool_clamped motion.digital-in-01 <= hm2_7i76e.0.7i76.0.0.input-11
 
 # --- DI 12 Machine power ---
-net external-machine-power-on halui.machine.on <= hm2_7i76e.0.7i76.0.0.input-12
-net external-machine-power-off halui.machine.off <= hm2_7i76e.0.7i76.0.0.input-12-not
+#net external-machine-power-on halui.machine.on <= hm2_7i76e.0.7i76.0.0.input-12
+#net external-machine-power-off halui.machine.off <= hm2_7i76e.0.7i76.0.0.input-12-not
 
 # --- DI 13 Cycle Start ---
-net external-cycle-start halui.program.run <= hm2_7i76e.0.7i76.0.0.input-13
+net external-cycle-start halui.program.run halui.program.resume <= hm2_7i76e.0.7i76.0.0.input-13
 
 # --- DI 14 Feed Hold ---
-net external-feed-hold halui.program.pause <= hm2_7i76e.0.7i76.0.0.input-14
+net external-feed-hold halui.program.pause <= hm2_7i76e.0.7i76.0.0.input-14-not
 
 # --- DI 15 Spindle manual Tool release ---
-#net manual-tool-release ??? <= hm2_7i76e.0.7i76.0.0.input-15
+net manual-tool-release <= hm2_7i76e.0.7i76.0.0.input-15
 
 
 
@@ -105,7 +105,7 @@ net spindle-air-seal motion.digital-out-03 => hm2_7i76e.0.7i76.0.0.output-05
 net tls-clean motion.digital-out-04 => hm2_7i76e.0.7i76.0.0.output-06
 
 # --- DO 07 Manual Toolchange allowed light ---
-net light-manual-toolchange-allowed spindle-enable-not => hm2_7i76e.0.7i76.0.0.output-07
+net light-manual-toolchange-allowed  => hm2_7i76e.0.7i76.0.0.output-07
 
 
 #*******************
@@ -333,17 +333,24 @@ net probe-tool      =>  motion.probe-input
 # offset.ntc is required since we don't need the output voltage but the voltage drop
 # comp.temp compares the computed temperature with a maximum temperature to trigger estop
 
-loadusr  -W thermistor
+#loadusr  -W thermistor
+#loadrt comp         names=comp.temp
+#addf comp.temp      servo-thread
+#loadrt  offset                              names=offset.ntc,offset.temp
+#addf    offset.ntc.update-feedback          servo-thread
+#addf    offset.temp.update-output           servo-thread
+#setp     offset.temp.offset 0
+#net      SPINDLE-temp                   offset.temp.out         comp.temp.in1
 
-setp     thermistor.0.t0-c                     [NTC]NTC_TEMP
-setp     thermistor.0.r0                       [NTC]NTC_RES
-setp     thermistor.0.beta                     [NTC]NTC_BETA
-setp     thermistor.0.r-other                  [NTC]VDIV_RES
-setp     comp.temp.in0                         [NTC]NTC_MAX_TEMP
+#setp     thermistor.0.t0-c                     [NTC]NTC_TEMP
+#setp     thermistor.0.r0                       [NTC]NTC_RES
+#setp     thermistor.0.beta                     [NTC]NTC_BETA
+#setp     thermistor.0.r-other                  [NTC]VDIV_RES
+#setp     comp.temp.in0                         [NTC]NTC_MAX_TEMP
 
-net      AI-SYS-fieldvoltage                   offset.ntc.fb-in                    
-net      AI-ATC-temp-sensor                    offset.ntc.offset                   
-net      ntc-voltage-drop                      offset.ntc.fb-out                   thermistor.0.v-thermistor
+#net      AI-SYS-fieldvoltage                   offset.ntc.fb-in
+#net      AI-ATC-temp-sensor                    offset.ntc.offset
+#net      ntc-voltage-drop                      offset.ntc.fb-out                   thermistor.0.v-thermistor
 
-net      AI-SYS-fieldvoltage                   thermistor.0.v-total
-net      SPINDLE-temp-ori                      thermistor.0.temperature-c          offset.temp.in
+#net      AI-SYS-fieldvoltage                   thermistor.0.v-total
+#net      SPINDLE-temp-ori                      thermistor.0.temperature-c          offset.temp.in
