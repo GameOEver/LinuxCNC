@@ -56,7 +56,27 @@ net max-home-z     <=  hm2_7i76e.0.7i76.0.0.input-06-not
 net estop-ext     <=  hm2_7i76e.0.7i76.0.0.input-07
 
 # --- DI 08 Probe-IN ---
-net probe-in     <=  hm2_7i76e.0.7i76.0.0.input-08-not
+#net probe-in     <=  hm2_7i76e.0.7i76.0.0.input-08-not
+#DEBOUNCE PROBE
+
+loadrt debounce cfg=1
+addf debounce.0 servo-thread
+
+setp debounce.0.delay 3
+
+net debounce-in <=  hm2_7i76e.0.7i76.0.0.input-08-not => debounce.0.0.in
+net probe-in debounce.0.0.out
+
+# PROBE
+loadrt or2 count=1
+addf or2.0 servo-thread
+
+
+net probe-in        =>  or2.0.in0
+net tls-in          =>  or2.0.in1
+net probe-tool          or2.0.out
+net probe-tool      =>  motion.probe-input
+
 
 # --- DI 09 TLS-IN ---
 net tls-in       <=  hm2_7i76e.0.7i76.0.0.input-09-not
@@ -72,10 +92,10 @@ net tool_clamped motion.digital-in-01 <= hm2_7i76e.0.7i76.0.0.input-11
 #net external-machine-power-off halui.machine.off <= hm2_7i76e.0.7i76.0.0.input-12-not
 
 # --- DI 13 Cycle Start ---
-net external-cycle-start halui.program.run halui.program.resume <= hm2_7i76e.0.7i76.0.0.input-13
+#net external-cycle-start halui.program.run halui.program.resume <= hm2_7i76e.0.7i76.0.0.input-13
 
 # --- DI 14 Feed Hold ---
-net external-feed-hold halui.program.pause <= hm2_7i76e.0.7i76.0.0.input-14-not
+#net external-feed-hold halui.program.pause <= hm2_7i76e.0.7i76.0.0.input-14-not
 
 # --- DI 15 Spindle manual Tool release ---
 net manual-tool-release <= hm2_7i76e.0.7i76.0.0.input-15
@@ -314,15 +334,13 @@ net tooloffset-x  <=  motion.tooloffset.x
 net tooloffset-z  <=  motion.tooloffset.z
 
 
-# PROBE
-loadrt or2 count=1
-addf or2.0 servo-thread
 
 
-net probe-in        =>  or2.0.in0
-net tls-in          =>  or2.0.in1
-net probe-tool          or2.0.out
-net probe-tool      =>  motion.probe-input
+#  ---ignore tool prepare requests---
+
+
+
+net tool-prepare-loopback   iocontrol.0.tool-prepare      =>  iocontrol.0.tool-prepared
 
 
 # ---------- SPINDLE NTC ----------
@@ -334,23 +352,24 @@ net probe-tool      =>  motion.probe-input
 # comp.temp compares the computed temperature with a maximum temperature to trigger estop
 
 #loadusr  -W thermistor
-loadrt comp         names=comp.temp
-addf comp.temp      servo-thread
+#loadrt comp         names=comp.temp
+#addf comp.temp      servo-thread
+#loadrt  offset                              names=offset.ntc,offset.temp
+#addf    offset.ntc.update-feedback          servo-thread
+#addf    offset.temp.update-output           servo-thread
+#setp     offset.temp.offset 0
+#net      SPINDLE-temp                   offset.temp.out         comp.temp.in1
 
-addf    offset.ntc.update-feedback          servo-thread
-addf    offset.temp.update-output           servo-thread
-setp     offset.temp.offset 0
-net      SPINDLE-temp                   offset.temp.out         comp.temp.in1
+#setp     thermistor.0.t0-c                     [NTC]NTC_TEMP
+#setp     thermistor.0.r0                       [NTC]NTC_RES
+#setp     thermistor.0.beta                     [NTC]NTC_BETA
+#setp     thermistor.0.r-other                  [NTC]VDIV_RES
+#setp     comp.temp.in0                         [NTC]NTC_MAX_TEMP
 
-setp     thermistor.0.t0-c                     [NTC]NTC_TEMP
-setp     thermistor.0.r0                       [NTC]NTC_RES
-setp     thermistor.0.beta                     [NTC]NTC_BETA
-setp     thermistor.0.r-other                  [NTC]VDIV_RES
-setp     comp.temp.in0                         [NTC]NTC_MAX_TEMP
+#net      AI-SYS-fieldvoltage                   offset.ntc.fb-in
+#net      AI-ATC-temp-sensor                    offset.ntc.offset
+#net      ntc-voltage-drop                      offset.ntc.fb-out                   thermistor.0.v-thermistor
 
-net      AI-SYS-fieldvoltage                   offset.ntc.fb-in
-net      AI-ATC-temp-sensor                    offset.ntc.offset
-net      ntc-voltage-drop                      offset.ntc.fb-out                   thermistor.0.v-thermistor
+#net      AI-SYS-fieldvoltage                   thermistor.0.v-total
+#net      SPINDLE-temp-ori                      thermistor.0.temperature-c          offset.temp.in
 
-net      AI-SYS-fieldvoltage                   thermistor.0.v-total
-net      SPINDLE-temp-ori                      thermistor.0.temperature-c          offset.temp.in
