@@ -13,7 +13,7 @@ addf scale-current servo-thread
 setp scale-spindle.gain 0.682666666666666666666
 
 # Current reported by VFD is in A/100 -> von 600 ausgehend ist es 0.166[...]7
-#Dann sollte ein Wert von 
+#Dann sollte ein Wert von
 setp scale-current.gain 0.16666666666666666666666666666667
 
 net spindle-speed-command <= spindle.0.speed-out-abs
@@ -63,13 +63,13 @@ addf process_wsums servo-thread
 # Set some constant bits
 setp wsum.0.bit.1.in TRUE # second stop function is always on. Might change in the future
 setp wsum.0.bit.3.in TRUE # pulse en
-setp wsum.0.bit.4.in TRUE # spindle-RFG-en 
+setp wsum.0.bit.4.in TRUE # spindle-RFG-en
 setp wsum.0.bit.5.in TRUE # RFG start
 setp wsum.0.bit.6.in TRUE # en setpoint
 setp wsum.0.bit.10.in TRUE # control from PLC
 
 # Connect relevant signals to STW
-net spindle-on-off         spindle.0.on => wsum.0.bit.0.in 
+net spindle-on-off         spindle.0.on => wsum.0.bit.0.in
 net machine-is-enabled		   => wsum.0.bit.2.in
 net spindle-reverse        spindle.0.reverse => wsum.0.bit.11.in
 net fault-ack              => wsum.0.bit.7.in
@@ -80,8 +80,8 @@ net convert-STW				wsum.0.sum => conv-STW.in
 # Spindle speed info conversion
 ## The value sent back by the VFD is centered around 32768
 loadrt offset names=0,1,offset.ntc,offset.temp
-addf offset.0.update-output servo-thread
-addf offset.1.update-output servo-thread
+addf 0.update-output servo-thread
+addf 1.update-output servo-thread
 
 loadrt abs
 addf abs.0 servo-thread
@@ -89,14 +89,14 @@ addf abs.0 servo-thread
 loadrt mult2
 addf mult2.0 servo-thread
 
-setp offset.0.offset -32768.0
-setp offset.1.offset -32768.0
+setp 0.offset -32768.0
+setp 1.offset -32768.0
 setp mult2.0.in1 -1.0
 
-net spindle-info-rpm offset.0.in
-net off-rpm offset.0.out abs.0.in
-net abs-off-rpm abs.0.out offset.1.in
-net corr-rpm offset.1.out mult2.0.in0
+net spindle-info-rpm 0.in
+net off-rpm 0.out abs.0.in
+net abs-off-rpm abs.0.out 1.in
+net corr-rpm 1.out mult2.0.in0
 
 # the true RPM value
 net true-rpm mult2.0.out
@@ -113,6 +113,4 @@ net true-rpm => spindle-near.in2
 net spindle-at-speed spindle.0.at-speed <= spindle-near.out
 
 net spindle-info-current => scale-current.in
-
-
-
+net spindle-current-scaled => scale-current.out

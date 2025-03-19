@@ -12,8 +12,8 @@ loadusr -W mb2hal config=sinamics_mb2hal.ini
 net STW-command				conv-STW.out => mb2hal.w_STW.00
 net HSW-command				scale-spindle.out => mb2hal.w_HSW.00
 
-net spindle-info-current    <= scale-spindle.out
-net spindle-info-current => qtpyvcp.spindle-load-indicator.in-f
+net spindle-info-current    <= mb2hal.run_info.01.float
+net spindle-current-scaled => qtpyvcp.spindle-load-indicator.in-f
 setp qtpyvcp.spindle-load-indicator.max-val 100
 
 net spindle-info-power      <= mb2hal.run_info.03.float
