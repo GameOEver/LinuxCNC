@@ -114,3 +114,11 @@ net spindle-at-speed spindle.0.at-speed <= spindle-near.out
 
 net spindle-info-current => scale-current.in
 net spindle-current-scaled => scale-current.out
+
+
+#-----------RS485 NTC----------------
+loadrt scale names=rs485ntcscale
+addf rs485ntcscale servo-thread
+
+
+

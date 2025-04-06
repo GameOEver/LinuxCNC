@@ -1,45 +1,34 @@
 # Halshow settings
 # This file is generated automatically.
-wm geometry . 1083x662+726+209
+wm geometry . 1083x662+863+158
 placeFrames 0.28291316526610644
 set ::ratio 0.28291316526610644
 set ::old_w_leftf 160
 set ::watchlist {
+    sig+probe-in
+    sig+debounce-in
+    sig+probe-tool
     sig+spindle-info-current
-    sig+spindle-info-rpm
+    pin+scale-current.in
+    pin+scale-current.gain
+    pin+scale-current.offset
+    pin+scale-current.out
     sig+spindle-info-power
-    sig+spindle-at-speed
-    pin+spindle.0.speed-out
-    pin+hm2_7i76e.0.7i76.0.0.input-08-not
-    sig+tool_clamped
-    sig+tool_released
-    sig+tls-clean
+    pin+offset.temp.offset
+    pin+offset.temp.fb-in
+    pin+offset.temp.fb-out
+    pin+offset.ntc.fb-in
+    pin+offset.ntc.fb-out
+    sig+min-home-x
     sig+spindle-air-in
     sig+spindle-air-return
     sig+spindle-air-seal
-    pin+scale-current.in
-    pin+scale-current.out
-    pin+scale-spindle.in
-    pin+scale-spindle.out
-    pin+qtpyvcp.spindle-load-indicator.in-f
-    pin+qtpyvcp.spindle-load-indicator.in-i
-    pin+qtpyvcp.spindle-load-indicator.max-val
-    pin+qtpyvcp.spindle-load-indicator.min-val
-    pin+motion.analog-in-00
-    pin+motion.analog-in-01
-    pin+motion.analog-out-00
-    sig+AI-ATC-temp-sensor
-    sig+AI-SYS-fieldvoltage
-    sig+max-home-z
-    sig+min-home-x
-    sig+min-home-y
-    sig+probe-in
-    sig+tls-in
-    pin+scale-spindle.gain
-    pin+scale-spindle.offset
-    pin+scale-spindle.time
-    sig+true-rpm
-    sig+light-manual-toolchange-allowed
+    sig+spindle-dust-remove
+    sig+tool_clamped
+    sig+tool_released
+    pin+mb2hal.rs485ntc.00.float
+    pin+mb2hal.rs485ntc.num_errors
+    sig+spindle-temp
 }
 set ::workmode watchhal
 set ::watchInterval 100
