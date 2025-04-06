@@ -41,4 +41,9 @@ setp axis.z.jog-accel-fraction 0.2
 
 
 #-----------RS485 NTC----------------
-net SPINDLE-temp                              mb2hal.rs485ntc.00
+loadrt scale names=rs485_ntc_scale
+addf rs485_ntc_scale servo-thread
+
+net rs485_ntc_scale.in                              mb2hal.rs485ntc.00
+setp rs485_ntc_scale.gain                           0.1
+net rs485_ntc_scale.out                             SPINDLE-temp
