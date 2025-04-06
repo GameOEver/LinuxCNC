@@ -372,9 +372,3 @@ net tool-prepare-loopback   iocontrol.0.tool-prepare      =>  iocontrol.0.tool-p
 #net      ntc-voltage-drop                      offset.ntc.fb-out                   thermistor.0.v-thermistor
 #loadrt  offset                              names=offset.ntc,offset.temp
 #addf    offset.ntc.update-feedback          servo-thread
-
-
-
-
-#-----------RS485 NTC----------------
-net SPINDLE-temp                              mbs2hal.rs485ntc.00
