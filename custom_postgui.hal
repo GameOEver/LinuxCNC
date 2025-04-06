@@ -37,3 +37,8 @@ net cycle-hours qtpyvcp.timerhours.in <= time.0.hours
 setp axis.x.jog-accel-fraction 0.3
 setp axis.y.jog-accel-fraction 0.3
 setp axis.z.jog-accel-fraction 0.2
+
+
+
+#-----------RS485 NTC----------------
+net SPINDLE-temp                              mb2hal.rs485ntc.00
