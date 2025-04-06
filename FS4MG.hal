@@ -26,11 +26,11 @@ setp hm2_7i76e.0.stepgen.timer-number 1
 # ---Analog Inputs---
 # --- AI 00 FIELDVOLTAGE ---
 # Note: Reference voltage 24v  through external port, as mesa internal ref voltage is garbage
-net     AI-SYS-fieldvoltage             <= hm2_7i76e.0.7i76.0.0.analogin0
+#net     AI-SYS-fieldvoltage             <= hm2_7i76e.0.7i76.0.0.analogin0
 
 # --- AI 01  ATC-TEMP-SENSOR ---
 # Note: Voltage from voltage divider over spindle temperature sensor
-net     AI-ATC-temp-sensor              <= hm2_7i76e.0.7i76.0.0.analogin1
+#net     AI-ATC-temp-sensor              <= hm2_7i76e.0.7i76.0.0.analogin1
 
 # --- AI 02  UNUSED ---
 # Note: Voltage from voltage divider over spindle temperature sensor
@@ -348,27 +348,33 @@ net tool-prepare-loopback   iocontrol.0.tool-prepare      =>  iocontrol.0.tool-p
 # offset.ntc is required since we don't need the output voltage but the voltage drop
 # comp.temp compares the computed temperature with a maximum temperature to trigger estop
 
-loadusr  -W thermistor
-loadrt comp         names=comp.temp
-addf comp.temp      servo-thread
+#loadusr  -W thermistor
+#loadrt comp         names=comp.temp
+#addf comp.temp      servo-thread
 
-addf    offset.temp.update-output           servo-thread
-setp     offset.temp.offset 0
+#addf    offset.temp.update-output           servo-thread
+#setp     offset.temp.offset 0
 
 
-setp     thermistor.0.t0-c                     [NTC]NTC_TEMP
-setp     thermistor.0.r0                       [NTC]NTC_RES
-setp     thermistor.0.beta                     [NTC]NTC_BETA
-setp     thermistor.0.r-other                  [NTC]VDIV_RES
-setp     comp.temp.in0                         [NTC]NTC_MAX_TEMP
+#setp     thermistor.0.t0-c                     [NTC]NTC_TEMP
+#setp     thermistor.0.r0                       [NTC]NTC_RES
+#setp     thermistor.0.beta                     [NTC]NTC_BETA
+#setp     thermistor.0.r-other                  [NTC]VDIV_RES
+#setp     comp.temp.in0                         [NTC]NTC_MAX_TEMP
 
-net       AI-ATC-temp-sensor                    thermistor.0.v-thermistor
-net       AI-SYS-fieldvoltage                   thermistor.0.v-total
-net       SPINDLE-temp-ori                      thermistor.0.temperature-c          offset.temp.in
-net       SPINDLE-temp                          offset.temp.out                     comp.temp.in1
+#net       AI-ATC-temp-sensor                    thermistor.0.v-thermistor
+#net       AI-SYS-fieldvoltage                   thermistor.0.v-total
+#net       SPINDLE-temp-ori                      thermistor.0.temperature-c          offset.temp.in
+#net       SPINDLE-temp                          offset.temp.out                     comp.temp.in1
 
 #net      AI-SYS-fieldvoltage                   offset.ntc.fb-in
 #net      AI-ATC-temp-sensor                    offset.ntc.offset
 #net      ntc-voltage-drop                      offset.ntc.fb-out                   thermistor.0.v-thermistor
 #loadrt  offset                              names=offset.ntc,offset.temp
 #addf    offset.ntc.update-feedback          servo-thread
+
+
+
+
+#-----------RS485 NTC----------------
+net SPINDLE-temp                              mbs2hal.rs485ntc.00
