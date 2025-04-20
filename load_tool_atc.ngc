@@ -26,6 +26,10 @@ o<load_tool_atc> sub
 #14 = #5203
 #15 = #5204
 #16 = #5205
+#17 = #5206
+#18 = #5207
+#19 = #5208
+#20 = #5209
 
 ; Determine if current_tool is alreay in carousel
 #<tool_pocket> = 0
