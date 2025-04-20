@@ -24,11 +24,11 @@ o888 if [#5399 EQ 1]
     (abort, Put tool pocket: Tool still in spindle)
 o888 end if 
 ; Cone Clean ON
-M132
+M64 P1
 G53 G0 Z #<_ini[ATC]ATC_TOP_SAFE_Z>
 ; Cone Clean OFF
-M133
-M131
+M65 P1
+M65 P0
 
 o<put_tool_pocket> endsub [1]
 M2
