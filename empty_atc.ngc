@@ -32,6 +32,14 @@ o<empty_atc> sub
 #5204 = 0
 (DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{16, 0}])
 #5205 = 0
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{17, 0}])
+#5206 = 0
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{18, 0}])
+#5207 = 0
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{19, 0}])
+#5208 = 0
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{20, 0}])
+#5209 = 0
 (MSG, All tool<>pocket entries deleted)
 
 o<empty_atc> endsub [1]
