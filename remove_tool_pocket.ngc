@@ -35,8 +35,8 @@ M66 P #<_ini[ATC]SENSOR_TOOL> L0  (needs to be high immediately)
 
 ; with ATC_RELEASE_SPEED move away from the pocket along Y
 F #<_ini[ATC]ATC_RELEASE_SPEED>
-#<safey>=[#<_ini[ATC]ATC_POCKET_Y> - #<_ini[ATC]ATC_FRONT_SAFE_Y>]
-G53 G1 Y#<safey> 
+#<safex> = [#<_ini[ATC]ATC_POCKET_X> - #<_ini[ATC]ATC_LEFT_SAFE_X>]
+G53 G1 Y#<safex> 
 
 o<remove_tool_pocket> endsub [1]
 M2
