@@ -13,13 +13,13 @@ G53 G0 Z #<_ini[ATC]ATC_TOP_SAFE_Z>
 ; Open the Spindle
 M22
 ; Cone Clean on
-M132
+M64 P1
 
 
 #<safez> = [#<_ini[ATC]ATC_POCKET_Z> + #<_ini[ATC]ATC_LIFT_OFF_Z>]
 G53 G0 Z #<safez>
 ; Cone Clean off
-M133
+M65 P1
 ; At ATC_PLACE_SPEED move onto the tool
 F #<_ini[ATC]ATC_PLACE_SPEED>
 G53 G1 Z #<_ini[ATC]ATC_POCKET_Z>
