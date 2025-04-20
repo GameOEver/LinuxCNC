@@ -78,7 +78,7 @@ net         carousel_enable     carousel.0.enable
 net         carousel_jog-fwd    carousel.0.jog-fwd
 net         carousel_jog-rev    carousel.0.jog-rev
 net         carousel_force-unhome carousel.0.unhome
-net         carousel_motor-vel  carousel.0.motor-vel    [HMOT](CARD0).stepgen.00.velocity-cmd
+net         carousel_motor-vel  carousel.0.motor-vel    [HMOT](CARD0).stepgen.03.velocity-cmd
 net         carousel_pocket-number  carousel.0.pocket-number 
 #conv-s32-float.atc-pocket.in
 # Setup READ Signals
