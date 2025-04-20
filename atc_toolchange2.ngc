@@ -23,6 +23,10 @@ o<atc_toolchange2> sub
 #14 = #5203
 #15 = #5204
 #16 = #5205
+#17 = #5206
+#18 = #5207
+#19 = #5208
+#20 = #5209
 
 (print, #<_task>)
 (print, Starting M6 tool change macro; New Tool  #<new_tool>)
