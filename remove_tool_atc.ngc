@@ -22,6 +22,10 @@ o<remove_tool_atc> sub
 #14 = #5203
 #15 = #5204
 #16 = #5205
+#17 = #5206
+#18 = #5207
+#19 = #5208
+#20 = #5209
 
 ; First: Check if the spindle is empty
 M66 P#<_ini[ATC]SENSOR_TOOL> L0
@@ -139,6 +143,14 @@ O160 endif
     #5204 = 0
   o<200> else if [#<target_pocket> EQ 16]
     #5205 = 0
+  o<200> else if [#<target_pocket> EQ 17]
+    #5206 = 0
+  o<200> else if [#<target_pocket> EQ 18]
+    #5207 = 0
+  o<200> else if [#<target_pocket> EQ 19]
+    #5208 = 0
+  o<200> else if [#<target_pocket> EQ 20]
+    #5209 = 0
   o<200> endif
   (print, Tool #<remove_tool_pocket_atc> successfully remove from pocket #<target_pocket> )
   M115
@@ -146,6 +158,9 @@ O160 endif
   G53 G0 X[#<_ini[MTC_POS]X>] Y[#<_ini[MTC_POS]Y>]
   G53 G0 Z[#<_ini[MTC_POS]Z>]
   (MSG, remove Tool ATC: Remove tool from spindle!)
+#
+# Hier noch ein M0 mit Nachricht, air-in ansteuern und dann wieder schließen
+#
 o<remove_tool_atc> endsub [1]
 M2
 
