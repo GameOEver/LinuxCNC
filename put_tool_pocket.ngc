@@ -5,13 +5,13 @@ o<put_tool_pocket> sub
 ; Assumes start at safe front location but ensures it by force placing
 ; Fast move to Safe position in front of pocket
 
-#<safey> = [#<_ini[ATC]ATC_POCKET_Y> - #<_ini[ATC]ATC_FRONT_SAFE_Y>]
+#<safex> = [#<_ini[ATC]ATC_POCKET_X> - #<_ini[ATC]ATC_LEFT_SAFE_X>]
 
-G53 G0 X #<_ini[ATC]ATC_POCKET_X> Y #<safey>      
+G53 G0 Y #<_ini[ATC]ATC_POCKET_Y> X #<safex>      
 G53 G0 Z #<_ini[ATC]ATC_POCKET_Z>
 ; with ATC_PLACE_SPEED move to final pocket position
 F #<_ini[ATC]ATC_PLACE_SPEED>
-G53 G1 Y #<_ini[ATC]ATC_POCKET_Y>
+G53 G1 X #<_ini[ATC]ATC_POCKET_X>
 ; Unclamp tool
 M22
 G91
